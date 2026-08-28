@@ -1,13 +1,11 @@
 # Cost-Aware-Fraud-Detection-Decision-Support-System 
-# FraudWatch — Cost-Aware Fraud Detection & Decision-Support System
-### End-to-End Capstone Project (BIA 5440, Humber College)
 
 ## Overview
 This is an **end-to-end capstone project** that builds a cost-aware fraud detection and decision-support framework for card-not-present (CNP) credit card transactions, using the IEEE-CIS Fraud Detection dataset (Vesta Corporation).
 
-Instead of optimizing for conventional classification accuracy, the project frames fraud detection as a **financial optimization problem** — balancing detection performance against the real dollar cost of false positives and false negatives. The project covers the full lifecycle: business problem definition → data engineering → machine learning → cost-based decision optimization → IT architecture & database design → solution design (Agile) → testing → Figma/dashboard delivery.
+Instead of optimizing for conventional classification accuracy, the project frames fraud detection as a **financial optimization problem**,  balancing detection performance against the real dollar cost of false positives and false negatives. The project covers the full lifecycle: business problem definition → data engineering → machine learning → cost-based decision optimization → IT architecture & database design → solution design (Agile) → testing → Figma/dashboard delivery.
 
-**Team:** Group 3 — Neha Kataria, Thi Khanh Linh Pham (Sylvia), Muskan, Ke Ping Lo, Karyn Denise Pang, Gull Qazi
+**Team:**  Neha Kataria, Thi Khanh Linh Pham (Sylvia), Muskan, Ke Ping Lo, Karyn Denise Pang, Gull Qazi
 **Professor:** Raed Karim
 
 ## Business Requirements
@@ -15,19 +13,6 @@ Instead of optimizing for conventional classification accuracy, the project fram
 2. Dollar-value threshold optimization
 3. Operational guidelines for deployment
 4. *(A 3-tier risk segmentation requirement was originally scoped but descoped later to keep focus on threshold optimization)*
-
-## Project Structure (Final Report)
-1. Executive Summary
-2. Introduction
-3. Business Problem Overview
-4. Analytics Questions (10 descriptive/diagnostic/predictive/prescriptive questions)
-5. Scope Statement
-6. Data Sources, Key Data Entities, and Data Flow
-7. Data Manipulation Process & Data Output
-8. New Solution Design and Fit into Existing IT Architecture
-9. New Solution Implementation and Outcome Testing
-10. Potential Solution Optimization
-11. Appendix (test cases, validation results, technical documentation)
 
 ## Data
 - **Transaction table:** 590,540 records
@@ -39,15 +24,15 @@ Instead of optimizing for conventional classification accuracy, the project fram
 ## Database
 - Built in **MySQL** (`FraudDetectionDB2`) with a full ERD covering all fraud-detection feature tables
 - Sprint-based build-out:
-  1. **Database Environment Setup** — schema design, primary/foreign keys, ERD validation
-  2. **Data Loading Pipeline** — imported raw CSVs into MySQL, resolved delimiter/format issues, validated row counts and NULL distributions
-  3. **Environment Integration & Pipeline Merging** — Python↔MySQL connection via SQLAlchemy, chunk-based extraction into pandas, merged on `TransactionID` into the unified modeling dataset
+  1. **Database Environment Setup**:schema design, primary/foreign keys, ERD validation
+  2. **Data Loading Pipeline**: imported raw CSVs into MySQL, resolved delimiter/format issues, validated row counts and NULL distributions
+  3. **Environment Integration & Pipeline Merging**: Python↔MySQL connection via SQLAlchemy, chunk-based extraction into pandas, merged on `TransactionID` into the unified modeling dataset
 
 ## Data Cleaning ("Guards")
 Three reusable, independently-tested validation functions, each validated via synthetic error injection:
-- **Duplicate Guard** — removes fully duplicated transaction records
-- **Error Guard** — removes rows with invalid business-critical values (e.g., negative/null amounts, out-of-range fraud labels)
-- **Missing Value Guard** — sentinel-value imputation (`-999`) for the heavily-missing V/D/M feature blocks, chosen over statistical imputation so the tree-based model can treat missingness as an informative signal
+- **Duplicate Guard**: removes fully duplicated transaction records
+- **Error Guard**: removes rows with invalid business-critical values (e.g., negative/null amounts, out-of-range fraud labels)
+- **Missing Value Guard**: sentinel-value imputation (`-999`) for the heavily-missing V/D/M feature blocks, chosen over statistical imputation so the tree-based model can treat missingness as an informative signal
 
 ## Feature Engineering & Modeling
 - Temporal, customer, device, and email-based behavioral features engineered from the cleaned dataset
@@ -80,19 +65,19 @@ The fixed threshold (0.017) was recommended for production over the per-transact
 ## Solution Design (Agile)
 Delivered through an iterative Agile process, organized as descriptive → diagnostic → predictive → prescriptive analytics sprints, each following a consistent workflow: **analytics question → feature coding (notebook) → Figma wireframe → interactive dashboard**.
 
-- **Descriptive** — fraud distribution, transaction-amount patterns, fraud by hour of day
-- **Diagnostic** — fraud by geographic region (region 299: 28.3% fraud rate vs. 3.5% baseline) and by device (new devices: 21.4% fraud rate vs. 1.8% for returning devices)
-- **Predictive** — Live Risk Feed (ranks transactions by fraud score, suggests Block/Manual Review/Monitor) and Detection Performance (model caught 85.3% of fraud cases — 2,644 of 3,100 — at 13.4% precision)
-- **Prescriptive** — riskiest hours for staffing, safe blocking range vs. review-team capacity, and cost comparison across strategies
+- **Descriptive**: fraud distribution, transaction-amount patterns, fraud by hour of day
+- **Diagnostic**: fraud by geographic region (region 299: 28.3% fraud rate vs. 3.5% baseline) and by device (new devices: 21.4% fraud rate vs. 1.8% for returning devices)
+- **Predictive**: Live Risk Feed (ranks transactions by fraud score, suggests Block/Manual Review/Monitor) and Detection Performance (model caught 85.3% of fraud cases — 2,644 of 3,100: at 13.4% precision)
+- **Prescriptive**: riskiest hours for staffing, safe blocking range vs. review-team capacity, and cost comparison across strategies
 
 ## Testing
-- **Master test suite: 40 test cases** — 4 test scenarios per each of the 10 analytics questions
+- **Master test suite: 40 test cases**: 4 test scenarios per each of the 10 analytics questions
 - Validated that expected outputs are correctly represented across the Figma/dashboard application's analytical screens
 
 ## Final Deliverable
 An interactive Figma-prototyped dashboard ("FraudWatch") built on top of the model and cost-analysis outputs, including:
-- **Live Risk Feed** — transaction-level fraud score, risk level, and suggested action
-- **Detection Performance** — recall/precision and transactions-under-review view
+- **Live Risk Feed**: transaction-level fraud score, risk level, and suggested action
+- **Detection Performance** : recall/precision and transactions-under-review view
 - **Geographic & device risk views**, **staffing/scheduling support**, and **cost-comparison view** (new system vs. traditional approach)
 
 ## Key Challenges
