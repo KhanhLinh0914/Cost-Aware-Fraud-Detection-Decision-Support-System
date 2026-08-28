@@ -76,7 +76,7 @@ Applied a Bahnsen-style cost-sensitive framework (Bayes Minimum Risk) with alpha
 The fixed threshold (0.017) was recommended for production over the per-transaction Bayes Minimum Risk approach due to greater simplicity, transparency, and auditability.
 
 ### 3.5 Testing
-- **Master test suite: 40 test cases** — 4 test scenarios per each of the 10 analytics questions
+- **Master test suite: 40 test cases**   
 - Validated that expected outputs are correctly represented across the Figma/dashboard application's analytical screens
 
 ### 3.6. Final Deliverable
@@ -84,6 +84,8 @@ Figma-prototyped & dashboard ("FraudWatch") built on top of the model and cost-a
 - **Live Risk Feed**: transaction-level fraud score, risk level, and suggested action
 - **Detection Performance**: recall/precision and transactions-under-review view
 - **Geographic & device risk views**, **staffing/scheduling support**, and **cost-comparison view** (new system vs. traditional approach)
+
+Figma prototype:  https://less-harp-55003755.figma.site/   Password: requires uppercase + lowercase + number + special character
 
 ## Key Challenges
 - High dimensionality and largely anonymized features (~434 columns after merge)
