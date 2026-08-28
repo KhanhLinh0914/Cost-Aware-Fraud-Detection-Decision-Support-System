@@ -1,0 +1,633 @@
+# Set new password
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'NewPassword123!';
+FLUSH PRIVILEGES;
+
+
+CREATE DATABASE FraudDetectionDB2;
+USE FraudDetectionDB2;
+
+CREATE TABLE fact_transaction (
+    TransactionID BIGINT PRIMARY KEY,
+    isFraud TINYINT,
+    TransactionDT BIGINT,
+    TransactionAmt DECIMAL(10,2),
+    ProductCD VARCHAR(10)
+);
+CREATE TABLE card_features (
+    TransactionID BIGINT PRIMARY KEY,
+    card1 INT,
+    card2 INT,
+    card3 INT,
+    card4 VARCHAR(10),
+    card5 INT,
+    card6 VARCHAR(10),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE location_features (
+    TransactionID BIGINT PRIMARY KEY,
+    addr1 INT,
+    addr2 INT,
+    dist1 DECIMAL(10,2),
+    dist2 DECIMAL(10,2),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE email_features (
+    TransactionID BIGINT PRIMARY KEY,
+    P_emaildomain VARCHAR(50),
+    R_emaildomain VARCHAR(50),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE C_features (
+    TransactionID BIGINT PRIMARY KEY,
+    C1 DECIMAL(10,4),
+    C2 DECIMAL(10,4),
+    C3 DECIMAL(10,4),
+    C4 DECIMAL(10,4),
+    C5 DECIMAL(10,4),
+    C6 DECIMAL(10,4),
+    C7 DECIMAL(10,4),
+    C8 DECIMAL(10,4),
+    C9 DECIMAL(10,4),
+    C10 DECIMAL(10,4),
+    C11 DECIMAL(10,4),
+    C12 DECIMAL(10,4),
+    C13 DECIMAL(10,4),
+    C14 DECIMAL(10,4),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE D_features (
+    TransactionID BIGINT PRIMARY KEY,
+    D1 DECIMAL(10,4),
+    D2 DECIMAL(10,4),
+    D3 DECIMAL(10,4),
+    D4 DECIMAL(10,4),
+    D5 DECIMAL(10,4),
+    D6 DECIMAL(10,4),
+    D7 DECIMAL(10,4),
+    D8 DECIMAL(10,4),
+    D9 DECIMAL(10,4),
+    D10 DECIMAL(10,4),
+    D11 DECIMAL(10,4),
+    D12 DECIMAL(10,4),
+    D13 DECIMAL(10,4),
+    D14 DECIMAL(10,4),
+    D15 DECIMAL(10,4),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE M_features (
+    TransactionID BIGINT PRIMARY KEY,
+    M1 VARCHAR(10),
+    M2 VARCHAR(10),
+    M3 VARCHAR(10),
+    M4 VARCHAR(10),
+    M5 VARCHAR(10),
+    M6 VARCHAR(10),
+    M7 VARCHAR(10),
+    M8 VARCHAR(10),
+    M9 VARCHAR(10),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE V1_features (
+    TransactionID BIGINT PRIMARY KEY,
+    V1 DECIMAL(10,4),
+    V2 DECIMAL(10,4),
+    V3 DECIMAL(10,4),
+    V4 DECIMAL(10,4),
+    V5 DECIMAL(10,4),
+    V6 DECIMAL(10,4),
+    V7 DECIMAL(10,4),
+    V8 DECIMAL(10,4),
+    V9 DECIMAL(10,4),
+    V10 DECIMAL(10,4),
+    V11 DECIMAL(10,4),
+    V12 DECIMAL(10,4),
+    V13 DECIMAL(10,4),
+    V14 DECIMAL(10,4),
+    V15 DECIMAL(10,4),
+    V16 DECIMAL(10,4),
+    V17 DECIMAL(10,4),
+    V18 DECIMAL(10,4),
+    V19 DECIMAL(10,4),
+    V20 DECIMAL(10,4),
+    V21 DECIMAL(10,4),
+    V22 DECIMAL(10,4),
+    V23 DECIMAL(10,4),
+    V24 DECIMAL(10,4),
+    V25 DECIMAL(10,4),
+    V26 DECIMAL(10,4),
+    V27 DECIMAL(10,4),
+    V28 DECIMAL(10,4),
+    V29 DECIMAL(10,4),
+    V30 DECIMAL(10,4),
+    V31 DECIMAL(10,4),
+    V32 DECIMAL(10,4),
+    V33 DECIMAL(10,4),
+    V34 DECIMAL(10,4),
+    V35 DECIMAL(10,4),
+    V36 DECIMAL(10,4),
+    V37 DECIMAL(10,4),
+    V38 DECIMAL(10,4),
+    V39 DECIMAL(10,4),
+    V40 DECIMAL(10,4),
+    V41 DECIMAL(10,4),
+    V42 DECIMAL(10,4),
+    V43 DECIMAL(10,4),
+    V44 DECIMAL(10,4),
+    V45 DECIMAL(10,4),
+    V46 DECIMAL(10,4),
+    V47 DECIMAL(10,4),
+    V48 DECIMAL(10,4),
+    V49 DECIMAL(10,4),
+    V50 DECIMAL(10,4),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE V2_features (
+    TransactionID BIGINT PRIMARY KEY,
+    V51 DECIMAL(10,4),
+    V52 DECIMAL(10,4),
+    V53 DECIMAL(10,4),
+    V54 DECIMAL(10,4),
+    V55 DECIMAL(10,4),
+    V56 DECIMAL(10,4),
+    V57 DECIMAL(10,4),
+    V58 DECIMAL(10,4),
+    V59 DECIMAL(10,4),
+    V60 DECIMAL(10,4),
+    V61 DECIMAL(10,4),
+    V62 DECIMAL(10,4),
+    V63 DECIMAL(10,4),
+    V64 DECIMAL(10,4),
+    V65 DECIMAL(10,4),
+    V66 DECIMAL(10,4),
+    V67 DECIMAL(10,4),
+    V68 DECIMAL(10,4),
+    V69 DECIMAL(10,4),
+    V70 DECIMAL(10,4),
+    V71 DECIMAL(10,4),
+    V72 DECIMAL(10,4),
+    V73 DECIMAL(10,4),
+    V74 DECIMAL(10,4),
+    V75 DECIMAL(10,4),
+    V76 DECIMAL(10,4),
+    V77 DECIMAL(10,4),
+    V78 DECIMAL(10,4),
+    V79 DECIMAL(10,4),
+    V80 DECIMAL(10,4),
+    V81 DECIMAL(10,4),
+    V82 DECIMAL(10,4),
+    V83 DECIMAL(10,4),
+    V84 DECIMAL(10,4),
+    V85 DECIMAL(10,4),
+    V86 DECIMAL(10,4),
+    V87 DECIMAL(10,4),
+    V88 DECIMAL(10,4),
+    V89 DECIMAL(10,4),
+    V90 DECIMAL(10,4),
+    V91 DECIMAL(10,4),
+    V92 DECIMAL(10,4),
+    V93 DECIMAL(10,4),
+    V94 DECIMAL(10,4),
+    V95 DECIMAL(10,4),
+    V96 DECIMAL(10,4),
+    V97 DECIMAL(10,4),
+    V98 DECIMAL(10,4),
+    V99 DECIMAL(10,4),
+    V100 DECIMAL(10,4),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE V3_features (
+    TransactionID BIGINT PRIMARY KEY,
+    V101 DECIMAL(10,4),
+    V102 DECIMAL(10,4),
+    V103 DECIMAL(10,4),
+    V104 DECIMAL(10,4),
+    V105 DECIMAL(10,4),
+    V106 DECIMAL(10,4),
+    V107 DECIMAL(10,4),
+    V108 DECIMAL(10,4),
+    V109 DECIMAL(10,4),
+    V110 DECIMAL(10,4),
+    V111 DECIMAL(10,4),
+    V112 DECIMAL(10,4),
+    V113 DECIMAL(10,4),
+    V114 DECIMAL(10,4),
+    V115 DECIMAL(10,4),
+    V116 DECIMAL(10,4),
+    V117 DECIMAL(10,4),
+    V118 DECIMAL(10,4),
+    V119 DECIMAL(10,4),
+    V120 DECIMAL(10,4),
+    V121 DECIMAL(10,4),
+    V122 DECIMAL(10,4),
+    V123 DECIMAL(10,4),
+    V124 DECIMAL(10,4),
+    V125 DECIMAL(10,4),
+    V126 DECIMAL(10,4),
+    V127 DECIMAL(10,4),
+    V128 DECIMAL(10,4),
+    V129 DECIMAL(10,4),
+    V130 DECIMAL(10,4),
+    V131 DECIMAL(10,4),
+    V132 DECIMAL(10,4),
+    V133 DECIMAL(10,4),
+    V134 DECIMAL(10,4),
+    V135 DECIMAL(10,4),
+    V136 DECIMAL(10,4),
+    V137 DECIMAL(10,4),
+    V138 DECIMAL(10,4),
+    V139 DECIMAL(10,4),
+    V140 DECIMAL(10,4),
+    V141 DECIMAL(10,4),
+    V142 DECIMAL(10,4),
+    V143 DECIMAL(10,4),
+    V144 DECIMAL(10,4),
+    V145 DECIMAL(10,4),
+    V146 DECIMAL(10,4),
+    V147 DECIMAL(10,4),
+    V148 DECIMAL(10,4),
+    V149 DECIMAL(10,4),
+    V150 DECIMAL(10,4),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE V4_features (
+    TransactionID BIGINT PRIMARY KEY,
+    V151 DECIMAL(10,4),
+    V152 DECIMAL(10,4),
+    V153 DECIMAL(10,4),
+    V154 DECIMAL(10,4),
+    V155 DECIMAL(10,4),
+    V156 DECIMAL(10,4),
+    V157 DECIMAL(10,4),
+    V158 DECIMAL(10,4),
+    V159 DECIMAL(10,4),
+    V160 DECIMAL(10,4),
+    V161 DECIMAL(10,4),
+    V162 DECIMAL(10,4),
+    V163 DECIMAL(10,4),
+    V164 DECIMAL(10,4),
+    V165 DECIMAL(10,4),
+    V166 DECIMAL(10,4),
+    V167 DECIMAL(10,4),
+    V168 DECIMAL(10,4),
+    V169 DECIMAL(10,4),
+    V170 DECIMAL(10,4),
+    V171 DECIMAL(10,4),
+    V172 DECIMAL(10,4),
+    V173 DECIMAL(10,4),
+    V174 DECIMAL(10,4),
+    V175 DECIMAL(10,4),
+    V176 DECIMAL(10,4),
+    V177 DECIMAL(10,4),
+    V178 DECIMAL(10,4),
+    V179 DECIMAL(10,4),
+    V180 DECIMAL(10,4),
+    V181 DECIMAL(10,4),
+    V182 DECIMAL(10,4),
+    V183 DECIMAL(10,4),
+    V184 DECIMAL(10,4),
+    V185 DECIMAL(10,4),
+    V186 DECIMAL(10,4),
+    V187 DECIMAL(10,4),
+    V188 DECIMAL(10,4),
+    V189 DECIMAL(10,4),
+    V190 DECIMAL(10,4),
+    V191 DECIMAL(10,4),
+    V192 DECIMAL(10,4),
+    V193 DECIMAL(10,4),
+    V194 DECIMAL(10,4),
+    V195 DECIMAL(10,4),
+    V196 DECIMAL(10,4),
+    V197 DECIMAL(10,4),
+    V198 DECIMAL(10,4),
+    V199 DECIMAL(10,4),
+    V200 DECIMAL(10,4),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE V5_features (
+    TransactionID BIGINT PRIMARY KEY,
+    V201 DECIMAL(10,4),
+    V202 DECIMAL(10,4),
+    V203 DECIMAL(10,4),
+    V204 DECIMAL(10,4),
+    V205 DECIMAL(10,4),
+    V206 DECIMAL(10,4),
+    V207 DECIMAL(10,4),
+    V208 DECIMAL(10,4),
+    V209 DECIMAL(10,4),
+    V210 DECIMAL(10,4),
+    V211 DECIMAL(10,4),
+    V212 DECIMAL(10,4),
+    V213 DECIMAL(10,4),
+    V214 DECIMAL(10,4),
+    V215 DECIMAL(10,4),
+    V216 DECIMAL(10,4),
+    V217 DECIMAL(10,4),
+    V218 DECIMAL(10,4),
+    V219 DECIMAL(10,4),
+    V220 DECIMAL(10,4),
+    V221 DECIMAL(10,4),
+    V222 DECIMAL(10,4),
+    V223 DECIMAL(10,4),
+    V224 DECIMAL(10,4),
+    V225 DECIMAL(10,4),
+    V226 DECIMAL(10,4),
+    V227 DECIMAL(10,4),
+    V228 DECIMAL(10,4),
+    V229 DECIMAL(10,4),
+    V230 DECIMAL(10,4),
+    V231 DECIMAL(10,4),
+    V232 DECIMAL(10,4),
+    V233 DECIMAL(10,4),
+    V234 DECIMAL(10,4),
+    V235 DECIMAL(10,4),
+    V236 DECIMAL(10,4),
+    V237 DECIMAL(10,4),
+    V238 DECIMAL(10,4),
+    V239 DECIMAL(10,4),
+    V240 DECIMAL(10,4),
+    V241 DECIMAL(10,4),
+    V242 DECIMAL(10,4),
+    V243 DECIMAL(10,4),
+    V244 DECIMAL(10,4),
+    V245 DECIMAL(10,4),
+    V246 DECIMAL(10,4),
+    V247 DECIMAL(10,4),
+    V248 DECIMAL(10,4),
+    V249 DECIMAL(10,4),
+    V250 DECIMAL(10,4),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE V6_features (
+    TransactionID BIGINT PRIMARY KEY,
+    V251 DECIMAL(10,4),
+    V252 DECIMAL(10,4),
+    V253 DECIMAL(10,4),
+    V254 DECIMAL(10,4),
+    V255 DECIMAL(10,4),
+    V256 DECIMAL(10,4),
+    V257 DECIMAL(10,4),
+    V258 DECIMAL(10,4),
+    V259 DECIMAL(10,4),
+    V260 DECIMAL(10,4),
+    V261 DECIMAL(10,4),
+    V262 DECIMAL(10,4),
+    V263 DECIMAL(10,4),
+    V264 DECIMAL(10,4),
+    V265 DECIMAL(10,4),
+    V266 DECIMAL(10,4),
+    V267 DECIMAL(10,4),
+    V268 DECIMAL(10,4),
+    V269 DECIMAL(10,4),
+    V270 DECIMAL(10,4),
+    V271 DECIMAL(10,4),
+    V272 DECIMAL(10,4),
+    V273 DECIMAL(10,4),
+    V274 DECIMAL(10,4),
+    V275 DECIMAL(10,4),
+    V276 DECIMAL(10,4),
+    V277 DECIMAL(10,4),
+    V278 DECIMAL(10,4),
+    V279 DECIMAL(10,4),
+    V280 DECIMAL(10,4),
+    V281 DECIMAL(10,4),
+    V282 DECIMAL(10,4),
+    V283 DECIMAL(10,4),
+    V284 DECIMAL(10,4),
+    V285 DECIMAL(10,4),
+    V286 DECIMAL(10,4),
+    V287 DECIMAL(10,4),
+    V288 DECIMAL(10,4),
+    V289 DECIMAL(10,4),
+    V290 DECIMAL(10,4),
+    V291 DECIMAL(10,4),
+    V292 DECIMAL(10,4),
+    V293 DECIMAL(10,4),
+    V294 DECIMAL(10,4),
+    V295 DECIMAL(10,4),
+    V296 DECIMAL(10,4),
+    V297 DECIMAL(10,4),
+    V298 DECIMAL(10,4),
+    V299 DECIMAL(10,4),
+    V300 DECIMAL(10,4),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+CREATE TABLE V7_features (
+    TransactionID BIGINT PRIMARY KEY,
+    V301 DECIMAL(10,4),
+    V302 DECIMAL(10,4),
+    V303 DECIMAL(10,4),
+    V304 DECIMAL(10,4),
+    V305 DECIMAL(10,4),
+    V306 DECIMAL(10,4),
+    V307 DECIMAL(10,4),
+    V308 DECIMAL(10,4),
+    V309 DECIMAL(10,4),
+    V310 DECIMAL(10,4),
+    V311 DECIMAL(10,4),
+    V312 DECIMAL(10,4),
+    V313 DECIMAL(10,4),
+    V314 DECIMAL(10,4),
+    V315 DECIMAL(10,4),
+    V316 DECIMAL(10,4),
+    V317 DECIMAL(10,4),
+    V318 DECIMAL(10,4),
+    V319 DECIMAL(10,4),
+    V320 DECIMAL(10,4),
+    V321 DECIMAL(10,4),
+    V322 DECIMAL(10,4),
+    V323 DECIMAL(10,4),
+    V324 DECIMAL(10,4),
+    V325 DECIMAL(10,4),
+    V326 DECIMAL(10,4),
+    V327 DECIMAL(10,4),
+    V328 DECIMAL(10,4),
+    V329 DECIMAL(10,4),
+    V330 DECIMAL(10,4),
+    V331 DECIMAL(10,4),
+    V332 DECIMAL(10,4),
+    V333 DECIMAL(10,4),
+    V334 DECIMAL(10,4),
+    V335 DECIMAL(10,4),
+    V336 DECIMAL(10,4),
+    V337 DECIMAL(10,4),
+    V338 DECIMAL(10,4),
+    V339 DECIMAL(10,4),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+
+SHOW TABLES;
+
+SET GLOBAL LOCAL_INFILE=ON;
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/fact_transaction.csv' 
+INTO TABLE fact_transaction
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/card_features.csv' 
+INTO TABLE card_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/location_features.csv' 
+INTO TABLE location_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/email_features.csv' 
+INTO TABLE email_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/C_features.csv' 
+INTO TABLE C_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/D_features.csv' 
+INTO TABLE D_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/M_features.csv' 
+INTO TABLE M_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/V1_features.csv' 
+INTO TABLE V1_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/V2_features.csv' 
+INTO TABLE V2_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/V3_features.csv' 
+INTO TABLE V3_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/V4_features.csv' 
+INTO TABLE V4_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/V5_features.csv' 
+INTO TABLE V5_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/V6_features.csv' 
+INTO TABLE V6_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/V7_features.csv' 
+INTO TABLE V7_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+# Transaction table has been loaded
+
+# Load identity table
+
+CREATE TABLE identity_features (
+    TransactionID BIGINT PRIMARY KEY,
+    id_01 VARCHAR(50),
+    id_02 VARCHAR(50),
+    id_03 VARCHAR(50),
+    id_04 VARCHAR(50),
+    id_05 VARCHAR(50),
+    id_06 VARCHAR(50),
+    id_07 VARCHAR(50),
+    id_08 VARCHAR(50),
+    id_09 VARCHAR(50),
+    id_10 VARCHAR(50),
+    id_11 VARCHAR(50),
+    id_12 VARCHAR(50),
+    id_13 VARCHAR(50),
+    id_14 VARCHAR(50),
+    id_15 VARCHAR(50),
+    id_16 VARCHAR(50),
+    id_17 VARCHAR(50),
+    id_18 VARCHAR(50),
+    id_19 VARCHAR(50),
+    id_20 VARCHAR(50),
+    id_21 VARCHAR(50),
+    id_22 VARCHAR(50),
+    id_23 VARCHAR(50),
+    id_24 VARCHAR(50),
+    id_25 VARCHAR(50),
+    id_26 VARCHAR(50),
+    id_27 VARCHAR(50),
+    id_28 VARCHAR(50),
+    id_29 VARCHAR(50),
+    id_30 VARCHAR(50),
+    id_31 VARCHAR(50),
+    id_32 VARCHAR(50),
+    id_33 VARCHAR(50),
+    id_34 VARCHAR(50),
+    id_35 VARCHAR(50),
+    id_36 VARCHAR(50),
+    id_37 VARCHAR(50),
+    id_38 VARCHAR(50),
+    DeviceType VARCHAR(50),
+    DeviceInfo VARCHAR(200),
+    FOREIGN KEY (TransactionID) REFERENCES fact_transaction(TransactionID)
+);
+
+
+LOAD DATA LOCAL INFILE 'C:/Users/kevin/Documents/CP Dataset/CP_Tables/identity_features.csv' 
+INTO TABLE identity_features
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+# Verify the Schema integrity
+SELECT COUNT(*) FROM fact_transaction;
+SELECT COUNT(*) FROM card_features;
+SELECT COUNT(*) FROM location_features;
+SELECT COUNT(*) FROM email_features;
+SELECT COUNT(*) FROM C_features;
+SELECT COUNT(*) FROM D_features;
+SELECT COUNT(*) FROM M_features;
+SELECT COUNT(*) FROM V1_features;
+SELECT COUNT(*) FROM V2_features;
+SELECT COUNT(*) FROM V3_features;
+SELECT COUNT(*) FROM V4_features;
+SELECT COUNT(*) FROM V5_features;
+SELECT COUNT(*) FROM V6_features;
+SELECT COUNT(*) FROM V7_features;
+SELECT COUNT(*) FROM identity_features;
+
+# Data ready to connect to python for analysis
