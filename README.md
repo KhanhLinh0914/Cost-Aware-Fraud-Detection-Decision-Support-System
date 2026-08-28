@@ -104,7 +104,6 @@ Figma prototype:  https://less-harp-55003755.figma.site/   Password: requires up
 ```
 ├── CAPSTONE.ipynb                                # Main notebook: cleaning, modeling, cost optimization
 ├── Capstone_Final_Report_Group_3.docx        # Full final report  
-├── figma/                                        # Figma wireframes / dashboard exports
 ├── sql/                                          # MySQL schema / ERD for FraudDetectionDB2
 └── README.md
 ```
