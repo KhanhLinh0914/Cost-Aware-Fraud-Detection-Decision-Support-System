@@ -25,6 +25,7 @@ Instead of optimizing for conventional classification accuracy, the project fram
 - Documented the **existing** bank fraud-analytics architecture: data sources (transaction, identity/device, customer DB, historical fraud logs, external email/IP risk APIs) → core processing (payment gateway, transaction authorization engine, rule-based fraud module) → data storage (SQL Server EDW, ETL logs/audit trails) → integration & connectivity (nightly ETL, ODBC/JDBC, TLS, API endpoints) → analytics & reporting (Power BI, analyst workstations)
 - Designed how the **new FraudWatch solution fits into this architecture**: transaction/identity data processed in the existing Databricks environment → LightGBM model scores each transaction → predictions and risk classifications stored in the existing data environment → surfaced via Power BI / the Figma-based dashboard prototype
 - Documented security & connectivity considerations (Port 1433/TLS for SQL Server, role-based access control, firewalls, API/ODBC-JDBC access)
+<img width="1182" height="1002" alt="IT Architecture_updated (2)" src="https://github.com/user-attachments/assets/239c7142-b415-47ac-88d5-d4eed48527c9" />
 
 ## 2. Solution Design (Agile)
 Delivered through an iterative Agile process, organized as descriptive → diagnostic → predictive → prescriptive analytics sprints, each following a consistent workflow: **analytics question → feature coding (notebook) → Figma wireframe → interactive dashboard**.
