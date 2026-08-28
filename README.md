@@ -6,7 +6,7 @@ This is an **end-to-end capstone project** that builds a cost-aware fraud detect
 Instead of optimizing for conventional classification accuracy, the project frames fraud detection as a **financial optimization problem**,  balancing detection performance against the real dollar cost of false positives and false negatives. The project covers the full lifecycle: business problem definition → data engineering → machine learning → cost-based decision optimization → IT architecture & database design → solution design (Agile) → testing → Figma/dashboard delivery.
 
 **Team:**  Neha Kataria, Thi Khanh Linh Pham (Sylvia), Muskan, Ke Ping Lo, Karyn Denise Pang, Gull Qazi
-**Professor:** Raed Karim
+ 
 
 ## Business Requirements
 1. Cost-aware fraud scoring (optimize for dollar impact, not just accuracy)
