@@ -29,7 +29,7 @@ Instead of optimizing for conventional classification accuracy, the project fram
 
 ## 2. Solution Design (Agile)
 Delivered through an iterative Agile process, organized as descriptive → diagnostic → predictive → prescriptive analytics sprints, each following a consistent workflow: **analytics question → feature coding (notebook) → Figma wireframe → interactive dashboard**.
-
+ 
 - **Descriptive**: fraud distribution, transaction-amount patterns, fraud by hour of day
 - **Diagnostic**: fraud by geographic region (region 299: 28.3% fraud rate vs. 3.5% baseline) and by device (new devices: 21.4% fraud rate vs. 1.8% for returning devices)
 - **Predictive**: Live Risk Feed (ranks transactions by fraud score, suggests Block/Manual Review/Monitor) and Detection Performance (model caught 85.3% of fraud cases — 2,644 of 3,100 — at 13.4% precision)
@@ -42,6 +42,9 @@ Delivered through an iterative Agile process, organized as descriptive → diagn
   1. **Database Environment Setup**:  schema design, primary/foreign keys, ERD validation
   2. **Data Loading Pipeline**: imported raw CSVs into MySQL, resolved delimiter/format issues, validated row counts and NULL distributions
   3. **Environment Integration & Pipeline Merging**: Python↔MySQL connection via SQLAlchemy, chunk-based extraction into pandas, merged on `TransactionID` into the unified modeling dataset
+     
+<img width="946" height="1149" alt="fraudDB2_ERD" src="https://github.com/user-attachments/assets/f23af65b-1aa7-4753-ba71-437d0542dc7f" />
+
 
 ### 3.2 Data Cleaning 
 Three reusable, independently-tested validation functions, each validated via synthetic error injection:
