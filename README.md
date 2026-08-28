@@ -71,7 +71,7 @@ Applied a Bahnsen-style cost-sensitive framework (Bayes Minimum Risk) with alpha
 | No model (baseline) | $469,608.50 | — | — |
 | Default threshold (0.5) | $344,621 | 26.6% | 35.6% |
 | **Cost-optimal fixed threshold (0.017)** | **$105,777.78** | **77.5%** | **85.3%** |
-| Bayes Minimum Risk (per-transaction) | $86,267 | 81.6% | — |
+| Bayes Minimum Risk (per-transaction) | $86,267 | 81.6% | 74.5% |
 
 The fixed threshold (0.017) was recommended for production over the per-transaction Bayes Minimum Risk approach due to greater simplicity, transparency, and auditability.
 
