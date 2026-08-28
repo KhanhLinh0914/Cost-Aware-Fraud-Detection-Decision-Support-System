@@ -111,10 +111,14 @@ Figma prototype:  https://less-harp-55003755.figma.site/   Password: requires up
 
 ## Repository Structure
 ```
-├── CAPSTONE.ipynb                                # Main notebook: cleaning, modeling, cost optimization
-├── Capstone_Final_Report_Group_3.docx            # Full final report  
-├── sql/                                          # MySQL schema / ERD for FraudDetectionDB2
+├── CAPSTONE_PROJECT_FINAL_CODE.ipynb            # Main notebook: cleaning, modeling, cost optimization
+├── Capstone - Final Report - Group 3.docx        # Full final report (all 11 sections + appendix)
+├── SQL_CP_break.sql                              # MySQL schema/queries for FraudDetectionDB2
+├── fraudDB2_ERD.mwb                              # Entity Relationship Diagram (MySQL Workbench file)
+├── fraudDB2_ERD.png                              # Entity Relationship Diagram (image export)
+├── fraud_detection_dashboard.pbix                # Power BI dashboard
 └── README.md
+
 ```
 
 ## Dataset
