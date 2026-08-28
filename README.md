@@ -11,7 +11,16 @@ Instead of optimizing for conventional classification accuracy, the project fram
 1. Cost-aware fraud scoring  
 2. Dollar-value threshold optimization
 3. Deliver a Figma-prototyped dashboard exposing the analytical outputs as user-facing functions: Live Risk Feed, Detection Performance, geographic/device risk views, staffing support, and cost comparison so that stakeholders can act on results without touching the underlying model
+
+## Tech Stack
  
+- Language: Python (pandas, NumPy)
+- Modeling: LightGBM, CatBoost, feed-forward Neural Network  
+- Database: MySQL (schema, ERD, FraudDetectionDB2)
+-  Reporting: Power BI + Microsoft Word 
+- Prototyping/UX: Figma
+- Environment: Jupyter Notebook
+- Dataset: IEEE-CIS Fraud Detection (Kaggle)
 
 ## Data
 - **Transaction table:** 590,540 records
