@@ -1,1 +1,129 @@
-# Cost-Aware-Fraud-Detection-Decision-Support-System
+# Cost-Aware-Fraud-Detection-Decision-Support-System 
+# FraudWatch — Cost-Aware Fraud Detection & Decision-Support System
+### End-to-End Capstone Project (BIA 5440, Humber College)
+
+## Overview
+This is an **end-to-end capstone project** that builds a cost-aware fraud detection and decision-support framework for card-not-present (CNP) credit card transactions, using the IEEE-CIS Fraud Detection dataset (Vesta Corporation).
+
+Instead of optimizing for conventional classification accuracy, the project frames fraud detection as a **financial optimization problem** — balancing detection performance against the real dollar cost of false positives and false negatives. The project covers the full lifecycle: business problem definition → data engineering → machine learning → cost-based decision optimization → IT architecture & database design → solution design (Agile) → testing → Figma/dashboard delivery.
+
+**Team:** Group 3 — Neha Kataria, Thi Khanh Linh Pham (Sylvia), Muskan, Ke Ping Lo, Karyn Denise Pang, Gull Qazi
+**Professor:** Raed Karim
+
+## Business Requirements
+1. Cost-aware fraud scoring (optimize for dollar impact, not just accuracy)
+2. Dollar-value threshold optimization
+3. Operational guidelines for deployment
+4. *(A 3-tier risk segmentation requirement was originally scoped but descoped later to keep focus on threshold optimization)*
+
+## Project Structure (Final Report)
+1. Executive Summary
+2. Introduction
+3. Business Problem Overview
+4. Analytics Questions (10 descriptive/diagnostic/predictive/prescriptive questions)
+5. Scope Statement
+6. Data Sources, Key Data Entities, and Data Flow
+7. Data Manipulation Process & Data Output
+8. New Solution Design and Fit into Existing IT Architecture
+9. New Solution Implementation and Outcome Testing
+10. Potential Solution Optimization
+11. Appendix (test cases, validation results, technical documentation)
+
+## Data
+- **Transaction table:** 590,540 records
+- **Identity table:** 144,233 records
+- Integrated via `TransactionID`; only ~24.4% of transactions matched an identity record
+- Overall fraud rate: ~3.5% (class imbalance: 96.5% legitimate / 3.5% fraud)
+- ~434 columns after merging, many anonymized (V-, D-, M-, ID-series)
+
+## Database
+- Built in **MySQL** (`FraudDetectionDB2`) with a full ERD covering all fraud-detection feature tables
+- Sprint-based build-out:
+  1. **Database Environment Setup** — schema design, primary/foreign keys, ERD validation
+  2. **Data Loading Pipeline** — imported raw CSVs into MySQL, resolved delimiter/format issues, validated row counts and NULL distributions
+  3. **Environment Integration & Pipeline Merging** — Python↔MySQL connection via SQLAlchemy, chunk-based extraction into pandas, merged on `TransactionID` into the unified modeling dataset
+
+## Data Cleaning ("Guards")
+Three reusable, independently-tested validation functions, each validated via synthetic error injection:
+- **Duplicate Guard** — removes fully duplicated transaction records
+- **Error Guard** — removes rows with invalid business-critical values (e.g., negative/null amounts, out-of-range fraud labels)
+- **Missing Value Guard** — sentinel-value imputation (`-999`) for the heavily-missing V/D/M feature blocks, chosen over statistical imputation so the tree-based model can treat missingness as an informative signal
+
+## Feature Engineering & Modeling
+- Temporal, customer, device, and email-based behavioral features engineered from the cleaned dataset
+- Chronological split: 70% train / 15% validation / 15% test (~413K / 88.5K / 88.5K)
+- Three models trained and compared:
+
+| Model | Validation AUC | Test AUC |
+|---|---|---|
+| **LightGBM (final)** | 0.9355 | 0.9071 |
+| CatBoost | 0.9159 | 0.9016 |
+| Neural Network | 0.8474 | 0.7182 |
+
+## Cost-Based Threshold Optimization
+Applied a Bahnsen-style cost-sensitive framework (Bayes Minimum Risk) with alpha sensitivity analysis (1%/2%/5%) and a capacity-constrained scenario. Cost basis: Ca = $2.69 (alpha = 2% of mean transaction amount, $134.60).
+
+| Strategy | Total Cost | Savings vs. Baseline | Fraud Recall |
+|---|---|---|---|
+| No model (baseline) | $469,608.50 | — | — |
+| Default threshold (0.5) | $344,621 | 26.6% | 35.6% |
+| **Cost-optimal fixed threshold (0.017)** | **$105,777.78** | **77.5%** | **85.3%** |
+| Bayes Minimum Risk (per-transaction) | $86,267 | 81.6% | — |
+
+The fixed threshold (0.017) was recommended for production over the per-transaction Bayes Minimum Risk approach due to greater simplicity, transparency, and auditability.
+
+## IT Architecture
+- Documented the **existing** bank fraud-analytics architecture: data sources (transaction, identity/device, customer DB, historical fraud logs, external email/IP risk APIs) → core processing (payment gateway, transaction authorization engine, rule-based fraud module) → data storage (SQL Server EDW, ETL logs/audit trails) → integration & connectivity (nightly ETL, ODBC/JDBC, TLS, API endpoints) → analytics & reporting (Power BI, analyst workstations)
+- Designed how the **new FraudWatch solution fits into this architecture**: transaction/identity data processed in the existing Databricks environment → LightGBM model scores each transaction → predictions and risk classifications stored in the existing data environment → surfaced via Power BI / the Figma-based dashboard prototype
+- Documented security & connectivity considerations (Port 1433/TLS for SQL Server, role-based access control, firewalls, API/ODBC-JDBC access)
+
+## Solution Design (Agile)
+Delivered through an iterative Agile process, organized as descriptive → diagnostic → predictive → prescriptive analytics sprints, each following a consistent workflow: **analytics question → feature coding (notebook) → Figma wireframe → interactive dashboard**.
+
+- **Descriptive** — fraud distribution, transaction-amount patterns, fraud by hour of day
+- **Diagnostic** — fraud by geographic region (region 299: 28.3% fraud rate vs. 3.5% baseline) and by device (new devices: 21.4% fraud rate vs. 1.8% for returning devices)
+- **Predictive** — Live Risk Feed (ranks transactions by fraud score, suggests Block/Manual Review/Monitor) and Detection Performance (model caught 85.3% of fraud cases — 2,644 of 3,100 — at 13.4% precision)
+- **Prescriptive** — riskiest hours for staffing, safe blocking range vs. review-team capacity, and cost comparison across strategies
+
+## Testing
+- **Master test suite: 40 test cases** — 4 test scenarios per each of the 10 analytics questions
+- Validated that expected outputs are correctly represented across the Figma/dashboard application's analytical screens
+
+## Final Deliverable
+An interactive Figma-prototyped dashboard ("FraudWatch") built on top of the model and cost-analysis outputs, including:
+- **Live Risk Feed** — transaction-level fraud score, risk level, and suggested action
+- **Detection Performance** — recall/precision and transactions-under-review view
+- **Geographic & device risk views**, **staffing/scheduling support**, and **cost-comparison view** (new system vs. traditional approach)
+
+## Key Challenges
+- High dimensionality and largely anonymized features (~434 columns after merge)
+- Structural missingness in identity data (only 24.4% of transactions had a matching identity record)
+- Block-wise missingness across the V-series features
+- Balancing data cleaning against preservation of genuine fraud signals (e.g., near-duplicate transactions can indicate card-testing rather than errors)
+- Severe class imbalance (96.5% legitimate / 3.5% fraud)
+
+## Future Enhancements (from report)
+- Formal, validation-driven optimization of risk thresholds (rather than manually selected cut-offs)
+- Transaction-amount-aware risk decisions (combining fraud probability with dollar exposure)
+- Automated three-tier fraud-risk categories (low/medium/high)
+- Real-time fraud scoring integrated into the live transaction pipeline
+
+## Repository Structure
+```
+├── CAPSTONEdonee.ipynb                          # Main notebook: cleaning, modeling, cost optimization
+├── Capstone_-_Assignment_3_-_Group_3.docx        # Solution design & IT architecture write-up
+├── Capstone_-_Final_Report_-_Group_3.docx        # Full final report (all 11 sections + appendix)
+├── Section_7_Data_Manipulation_Report.docx       # Report on the data manipulation process
+├── Data_Manipulation_Slides.pptx                 # 2-slide summary of the data manipulation pipeline
+├── figma/                                        # Figma wireframes / dashboard exports
+├── sql/                                          # MySQL schema / ERD for FraudDetectionDB2
+└── README.md
+```
+
+## Dataset
+This project uses the [IEEE-CIS Fraud Detection dataset](https://www.kaggle.com/c/ieee-fraud-detection) from Kaggle. Due to file size, the raw data is not included in this repository — download it directly from Kaggle to reproduce the notebook.
+
+## References
+1. Bahnsen, A. C., Stojanovic, A., Aouada, D., & Ottersten, B. (2013). Cost sensitive credit card fraud detection using Bayes minimum risk. *ICMLA 2013*.
+2. Khalili, N., & Rastegar, M. A. (2023). Optimal cost-sensitive credit scoring using a new hybrid performance metric. *Expert Systems with Applications, 213*.
+3. Vesta Corporation. (2019). *IEEE-CIS Fraud Detection* [Data set]. Kaggle.
